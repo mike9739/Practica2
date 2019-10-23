@@ -1,0 +1,56 @@
+<h1>Empleados</h1>
+<hr>
+<div class="row">
+    <div class="col text-right">
+        <button class="btn btn-primary mt-3"
+        routerLink="/Empleado/nuevo"
+        >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Agregar
+        </button>
+    </div>
+</div>
+
+<table *ngIf="!loading && empleados.length > 0" class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido Paterno</th>
+        <th scope="col">Apellido Materno</th>
+        <th scope="col">Tool</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados; let i = index">
+        <th scope="row">{{i +1}}</th>
+        <td>{{empleado.nombre}}</td>
+        <td>{{empleado.Papellido}}</td>
+        <td>{{empleado.Mapellido}}</td>
+        <td>
+          <button [routerLink]="['/Empleado',empleado.id]" routerLinkActive="router-link-active"  class="btn btn-info mr-1"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button (click)="deleteHeroe(empleado,i)" type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true">
+          </i></button>
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!loading && empleados.length === 0" class="alert alert-warning text-center animated fadeIn faster" role="alert">
+        <h4 class="alert-heading">No hay registros</h4>
+        <p>
+            
+            <i class="fas fa-exclamation fa-5x  "></i>
+        </p>
+        
+      </div>
+ <div *ngIf="loading" class="alert alert-info text-center animated fadeIn faster" role="alert">
+   <h4 class="alert-heading">Cargando</h4>
+   <p>
+       
+       <i class="fas fa-sync  fa-spin fa-5x  "></i>
+   </p>
+   <p class="mb-0">
+       Por favor espere
+   </p>
+ </div>
